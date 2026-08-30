@@ -1,2 +1,30 @@
 import type { SymbolValue } from "../lib/latin-square/types";
-export function SymbolPicker({symbols,value,onChange}:{symbols:SymbolValue[];value:SymbolValue|null;onChange:(v:SymbolValue)=>void}){return <div className="w-full max-w-[520px]"><p className="mb-2 text-center text-xs font-medium text-slate-500 sm:hidden">Select the symbol that belongs in the highlighted cell</p><div className="grid grid-cols-5 gap-2">{symbols.map(s=><button key={s} type="button" onClick={()=>onChange(s)} className={`h-12 rounded-xl border text-base font-bold shadow-sm transition active:scale-95 ${value===s?"border-blue-600 bg-blue-600 text-white":"border-slate-300 bg-white text-slate-900 hover:border-slate-400"}`}>{s}</button>)}</div></div>}
+export function SymbolPicker({
+  symbols,
+  value,
+  onChange,
+}: {
+  symbols: SymbolValue[];
+  value: SymbolValue | null;
+  onChange: (v: SymbolValue) => void;
+}) {
+  return (
+    <div className="w-full max-w-[520px]">
+      <p className="mb-2 text-center text-xs font-medium text-slate-500 sm:hidden">
+        Select the symbol that belongs in the highlighted cell
+      </p>
+      <div className="grid grid-cols-5 gap-2">
+        {symbols.map((s) => (
+          <button
+            key={s}
+            type="button"
+            onClick={() => onChange(s)}
+            className={`h-12 rounded-xl border text-base font-bold shadow-sm transition active:scale-95 ${value === s ? "border-blue-600 bg-blue-600 text-white" : "border-slate-300 bg-white text-slate-900 hover:border-slate-400"}`}
+          >
+            {s}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}

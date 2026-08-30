@@ -1,7 +1,9 @@
 import type { LatinSquarePuzzle } from "./types";
 
 export function buildAiPrompt(puzzle: LatinSquarePuzzle): string {
-  const rows = puzzle.puzzle.map((row, r) => `R${r + 1}: ${row.map((v) => v ?? "?").join("  ")}`);
+  const rows = puzzle.puzzle.map(
+    (row, r) => `R${r + 1}: ${row.map((v) => v ?? "?").join("  ")}`,
+  );
   const target = `R${puzzle.target.row + 1}C${puzzle.target.column + 1}`;
 
   return [

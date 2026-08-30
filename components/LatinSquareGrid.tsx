@@ -27,7 +27,11 @@ export function LatinSquareGrid({ puzzle, answer, result }: Props) {
           }
 
           return (
-            <div key={`${r}-${c}`} className={`latin-cell ${value ? "given" : "blank"}`} role="gridcell">
+            <div
+              key={`${r}-${c}`}
+              className={`latin-cell ${value ? "given" : "blank"}`}
+              role="gridcell"
+            >
               {value}
             </div>
           );
