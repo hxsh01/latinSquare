@@ -115,7 +115,7 @@ export default function Home() {
           >
             <div className="min-w-0">
               <div className="text-xl font-black tracking-tight sm:text-4xl">
-                5x5 Latin Square Generator
+                Latin Square Generator
               </div>
               {!isSettingsOpen && (
                 <p className="mt-3 text-sm font-bold capitalize text-slate-900">
