@@ -9,15 +9,6 @@ export const metadata: Metadata = {
   },
   description:
     "Generate free 5×5 Latin square puzzles with Easy, Medium and Hard difficulty. Practice Latin square reasoning questions with a timer and instant solutions.",
-  keywords: [
-    "latin square generator",
-    "5x5 latin square generator",
-    "latin square puzzle generator",
-    "latin square solver",
-    "latin square practice",
-    "latin square questions",
-    "latin square reasoning questions",
-  ],
   robots: {
     index: true,
     follow: true,

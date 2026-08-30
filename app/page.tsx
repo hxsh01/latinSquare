@@ -281,7 +281,7 @@ export default function Home() {
           </section>
         )}
 
-        {!puzzle && (
+        {/* {!puzzle && (
           <section className="mt-12 border-t border-slate-200 pt-10">
             <div className="max-w-none text-slate-700">
               <h2 className="text-2xl font-black text-slate-900">
@@ -383,7 +383,7 @@ export default function Home() {
               </p>
             </div>
           </section>
-        )}
+        )} */}
       </div>
     </main>
   );
