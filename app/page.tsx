@@ -115,7 +115,7 @@ export default function Home() {
           >
             <div className="min-w-0">
               <div className="text-xl font-black tracking-tight sm:text-4xl">
-                Latin Square Trainer
+                5x5 Latin Square Generator
               </div>
               {!isSettingsOpen && (
                 <p className="mt-3 text-sm font-bold capitalize text-slate-900">
@@ -282,13 +282,106 @@ export default function Home() {
         )}
 
         {!puzzle && (
-          <section className="mt-5 rounded-3xl border border-dashed border-slate-300 bg-white/70 p-8 text-center sm:p-12">
-            <h2 className="text-lg font-bold">Ready when you are</h2>
+          <section className="mt-12 border-t border-slate-200 pt-10">
+            <div className="max-w-none text-slate-700">
+              <h2 className="text-2xl font-black text-slate-900">
+                Free 5×5 Latin Square Generator
+              </h2>
 
-            <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-slate-500">
-              Choose a difficulty and generate a problem. The timer starts as
-              soon as the problem appears.
-            </p>
+              <p className="mt-3 text-sm leading-7 sm:text-base">
+                Generate random 5×5 Latin square puzzles and practice solving
+                them under timed conditions. Choose Easy, Medium, or Hard
+                difficulty and find the symbol that belongs in the highlighted
+                cell.
+              </p>
+
+              <p className="mt-3 text-sm leading-7 sm:text-base">
+                Each puzzle contains a similar number of prefilled cells. The
+                difficulty changes based on the logical deductions needed to
+                determine the answer rather than simply increasing the number of
+                empty cells.
+              </p>
+
+              <h2 className="mt-8 text-xl font-black text-slate-900">
+                What is a Latin Square?
+              </h2>
+
+              <p className="mt-3 text-sm leading-7 sm:text-base">
+                A Latin square is an n×n grid containing n different symbols
+                where each symbol occurs exactly once in every row and exactly
+                once in every column.
+              </p>
+
+              <p className="mt-3 text-sm leading-7 sm:text-base">
+                In a 5×5 Latin square, the five symbols are A, B, C, D, and E.
+                Every row and every column must contain each of these symbols
+                exactly once.
+              </p>
+
+              <h2 className="mt-8 text-xl font-black text-slate-900">
+                How to Solve a Latin Square Puzzle
+              </h2>
+
+              <p className="mt-3 text-sm leading-7 sm:text-base">
+                To solve a Latin square problem, examine the highlighted cell
+                and use the symbols already present in its row and column to
+                eliminate possible answers.
+              </p>
+
+              <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm leading-7 sm:text-base">
+                <li>Look at the symbols already present in the target row.</li>
+                <li>Identify which symbols are missing from that row.</li>
+                <li>
+                  Check the target column and eliminate symbols already present
+                  there.
+                </li>
+                <li>
+                  Use information from other rows and columns if multiple
+                  candidates remain.
+                </li>
+                <li>Enter the remaining symbol and submit your answer.</li>
+              </ol>
+
+              <h2 className="mt-8 text-xl font-black text-slate-900">
+                Latin Square Difficulty Levels
+              </h2>
+
+              <h3 className="mt-5 text-lg font-bold text-slate-900">Easy</h3>
+
+              <p className="mt-2 text-sm leading-7 sm:text-base">
+                Easy Latin square problems can be solved using short and
+                relatively direct deductions. They are suitable for learning the
+                basic row and column elimination technique.
+              </p>
+
+              <h3 className="mt-5 text-lg font-bold text-slate-900">Medium</h3>
+
+              <p className="mt-2 text-sm leading-7 sm:text-base">
+                Medium problems require several connected deductions. You may
+                need to use information from other rows or columns before the
+                highlighted cell can be determined.
+              </p>
+
+              <h3 className="mt-5 text-lg font-bold text-slate-900">Hard</h3>
+
+              <p className="mt-2 text-sm leading-7 sm:text-base">
+                Hard problems require longer chains of logical reasoning and
+                consideration of multiple possible candidates before the correct
+                symbol becomes clear.
+              </p>
+
+              <h2 className="mt-8 text-xl font-black text-slate-900">
+                Latin Square Reasoning Practice
+              </h2>
+
+              <p className="mt-3 text-sm leading-7 sm:text-base">
+                Use this Latin square generator to practice reasoning questions
+                under timed conditions. The timer starts when a problem is
+                generated and stops when you submit your answer. After
+                submission, you can see the complete Latin square, the correct
+                answer, and the time taken to solve the problem.
+              </p>
+            </div>
           </section>
         )}
       </div>
