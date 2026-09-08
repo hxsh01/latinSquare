@@ -13,6 +13,10 @@ import type {
   LatinSquarePuzzle,
   SymbolValue,
 } from "../lib/latin-square/types";
+import {
+  trackGenerate,
+  trackPuzzleResult,
+} from "../lib/analytics";
 
 export default function Home() {
   const [difficulty, setDifficulty] = useState<Difficulty>("easy");
@@ -33,6 +37,7 @@ export default function Home() {
         const next = generateLatinSquarePuzzle(difficulty);
 
         setPuzzle(next);
+        trackGenerate(difficulty);
         setAnswer(null);
         setResult(null);
 
@@ -93,13 +98,22 @@ export default function Home() {
   }
 
   function submit() {
-    if (!puzzle || !answer) return;
+    if (!puzzle || !answer || !startedAt) return;
 
     const end = Date.now();
+    const solveTimeSeconds = Math.round((end - startedAt) / 1000);
+    const isCorrect = validateTarget(puzzle, answer);
+    const puzzleResult = isCorrect ? "correct" : "incorrect";
 
     setFinishedAt(end);
     setNow(end);
-    setResult(validateTarget(puzzle, answer) ? "correct" : "incorrect");
+    setResult(puzzleResult);
+
+    trackPuzzleResult(
+      puzzle.difficulty,
+      puzzleResult,
+      solveTimeSeconds,
+    );
   }
 
   return (
