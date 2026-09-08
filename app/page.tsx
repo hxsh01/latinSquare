@@ -105,72 +105,31 @@ export default function Home() {
   return (
     <main className="min-h-screen px-4 py-6 sm:px-6 sm:py-10">
       <div className="mx-auto max-w-4xl">
-        <section className="rounded-3xl border border-slate-200 bg-white shadow-soft">
-          <button
-            type="button"
-            onClick={() => setIsSettingsOpen((open) => !open)}
-            className="flex w-full items-center justify-between gap-2 px-2 py-1 text-left sm"
-            aria-expanded={isSettingsOpen}
-            aria-controls="problem-settings"
-          >
-            <div className="min-w-0">
-              <div className="text-xl font-black tracking-tight sm:text-4xl">
-                Latin Square Generator
-              </div>
-              {!isSettingsOpen && (
-                <p className="mt-3 text-sm font-bold capitalize text-slate-900">
-                  Difficulty: {difficulty}
-                </p>
-              )}
-            </div>
+        <section className="rounded-xl border border-slate-100 shadow-soft sm:p-2">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <h1 className="text-xl font-black tracking-tight sm:text-xl">
+              Latin Square Generator
+            </h1>
 
-            <span
-              className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-slate-600 transition-transform duration-200 ${
-                isSettingsOpen ? "rotate-180" : ""
-              }`}
-              aria-hidden="true"
-            >
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path
-                  d="M4 6L8 10L12 6"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </span>
-          </button>
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+              <DifficultySelector
+                value={difficulty}
+                onChange={handleDifficultyChange}
+                disabled={generating}
+              />
 
-          <div
-            id="problem-settings"
-            className={`grid transition-[grid-template-rows] duration-200 ease-in-out ${
-              isSettingsOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-            }`}
-          >
-            <div className="overflow-hidden">
-              <div className="border-t border-slate-100 p-2 sm:p-6">
-                <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
-                  <DifficultySelector
-                    value={difficulty}
-                    onChange={handleDifficultyChange}
-                    disabled={generating}
-                  />
-
-                  <button
-                    type="button"
-                    onClick={generate}
-                    disabled={generating}
-                    className="h-11 rounded-xl bg-blue-600 px-5 text-sm font-bold text-white shadow-sm hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60 sm:min-w-44"
-                  >
-                    {generating
-                      ? "Generating…"
-                      : puzzle
-                        ? "Generate New Problem"
-                        : "Generate Problem"}
-                  </button>
-                </div>
-              </div>
+              <button
+                type="button"
+                onClick={generate}
+                disabled={generating}
+                className="h-11 rounded-xl bg-blue-600 px-5 text-sm font-bold text-white shadow-sm hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60 sm:min-w-20"
+              >
+                {generating
+                  ? "Generating…"
+                  : puzzle
+                    ? "Generate"
+                    : "Generate"}
+              </button>
             </div>
           </div>
         </section>
