@@ -1,4 +1,4 @@
-# Latin Square Trainer
+# Latin Square Generator
 
 A responsive Next.js + TypeScript + Tailwind application for practicing 5×5 Latin-square questions in the style of the supplied dMAT reference.
 
