@@ -120,7 +120,7 @@ export default function Home() {
   return (
     <main className="min-h-screen px-4 py-6 sm:px-6 sm:py-10">
       <div className="mx-auto max-w-4xl">
-        <section className="rounded-3xl border border-slate-200 bg-white shadow-soft">
+        <section className="rounded-3xl border border-slate-200 bg-white p-4 shadow-soft">
           <button
             type="button"
             onClick={() => setIsSettingsOpen((open) => !open)}
