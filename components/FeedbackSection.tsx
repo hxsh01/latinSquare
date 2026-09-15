@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { trackFeedbackSubmit } from "../lib/analytics";
 
 type Category = "feedback" | "feature";
 
@@ -10,7 +11,6 @@ export function FeedbackSection() {
   const [rating, setRating] = useState(0);
   const [message, setMessage] = useState("");
   const [submitting, setSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
 
   async function handleSubmit() {
     if (!message.trim() || rating === 0 || submitting) return;
@@ -33,6 +33,8 @@ export function FeedbackSection() {
         if (!response.ok) {
         throw new Error("Failed to submit feedback");
         }
+
+        trackFeedbackSubmit(category, rating);
 
         setMessage("");
         setRating(0);

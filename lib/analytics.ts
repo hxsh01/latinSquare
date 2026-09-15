@@ -35,3 +35,13 @@ export function trackPuzzleResult(
     solve_time_seconds: solveTimeSeconds,
   });
 }
+
+export function trackFeedbackSubmit(
+  category: "feedback" | "feature",
+  rating: number,
+) {
+  trackEvent("feedback_submit", {
+    category,
+    rating,
+  });
+}
