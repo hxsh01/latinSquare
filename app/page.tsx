@@ -8,6 +8,7 @@ import { SymbolPicker } from "../components/SymbolPicker";
 import { Timer } from "../components/Timer";
 import { generateLatinSquarePuzzle } from "../lib/latin-square/generator";
 import { validateTarget } from "../lib/latin-square/validator";
+import { FeedbackSection } from "../components/FeedbackSection";
 import type {
   Difficulty,
   LatinSquarePuzzle,
@@ -294,6 +295,8 @@ export default function Home() {
             <AiPrompt puzzle={puzzle} />
           </section>
         )}
+
+        <FeedbackSection />
 
         {/* {!puzzle && (
           <section className="mt-12 border-t border-slate-200 pt-10">
