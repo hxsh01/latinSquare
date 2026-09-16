@@ -6,7 +6,7 @@ import { trackFeedbackSubmit } from "../lib/analytics";
 type Category = "feedback" | "feature";
 
 export function FeedbackSection() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const [category, setCategory] = useState<Category>("feedback");
   const [rating, setRating] = useState(0);
   const [message, setMessage] = useState("");
