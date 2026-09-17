@@ -18,6 +18,10 @@ import {
   trackGenerate,
   trackPuzzleResult,
 } from "../lib/analytics";
+import {
+  encodePuzzle,
+  decodePuzzle,
+} from "../lib/latin-square/share";
 
 export default function Home() {
   const [difficulty, setDifficulty] = useState<Difficulty>("easy");
@@ -29,6 +33,7 @@ export default function Home() {
   const [result, setResult] = useState<"correct" | "incorrect" | null>(null);
   const [generating, setGenerating] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(true);
+  const [sharedLoaded, setSharedLoaded] = useState(false);
 
   const generate = useCallback(() => {
     setGenerating(true);
@@ -53,6 +58,52 @@ export default function Home() {
       }
     });
   }, [difficulty]);
+
+  useEffect(() => {
+  if (sharedLoaded) return;
+
+  const params = new URLSearchParams(window.location.search);
+  const shared = params.get("puzzle");
+
+  if (!shared) {
+    setSharedLoaded(true);
+    return;
+  }
+
+  const decoded = decodePuzzle(shared);
+
+  if (!decoded) {
+    setSharedLoaded(true);
+    return;
+  }
+
+  const nextPuzzle: LatinSquarePuzzle = {
+      size: 5,
+      symbols: ["A", "B", "C", "D", "E"],
+      puzzle: decoded.puzzle,
+      solution: decoded.solution,
+      difficulty: decoded.difficulty,
+      clueCount: decoded.puzzle.flat().filter(Boolean).length,
+      target: decoded.target,
+      targetValue: decoded.targetValue,
+      deductionDepth: 0,
+      initialCandidateCount: 0,
+    };
+
+    const start = Date.now();
+
+    setPuzzle(nextPuzzle);
+    setDifficulty(decoded.difficulty);
+    setAnswer(null);
+    setResult(null);
+    setStartedAt(start);
+    setFinishedAt(null);
+    setNow(start);
+    setIsSettingsOpen(false);
+    setSharedLoaded(true);
+
+    window.history.replaceState({}, "", window.location.pathname);
+  }, [sharedLoaded]);
 
   useEffect(() => {
     if (!startedAt || finishedAt) return;
@@ -96,6 +147,17 @@ export default function Home() {
     setStartedAt(null);
     setFinishedAt(null);
     setIsSettingsOpen(true);
+  }
+
+  function sharePuzzle() {
+    if (!puzzle) return;
+
+    const encoded = encodePuzzle(puzzle);
+    const url = `${window.location.origin}/?puzzle=${encoded}`;
+
+    navigator.clipboard.writeText(url);
+
+    alert("Puzzle link copied to clipboard.");
   }
 
   function submit() {
@@ -216,15 +278,24 @@ export default function Home() {
                 value={answer}
                 onChange={setAnswer}
               />
+              <div className="flex w-full max-w-[520px] gap-3">
+                <button
+                  type="button"
+                  onClick={submit}
+                  disabled={!answer || submitted}
+                  className="w-full max-w-[520px] rounded-xl bg-slate-900 py-3 text-sm font-bold text-white hover:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  Submit Answer
+                </button>
 
-              <button
-                type="button"
-                onClick={submit}
-                disabled={!answer || submitted}
-                className="w-full max-w-[520px] rounded-xl bg-slate-900 py-3 text-sm font-bold text-white hover:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-40"
-              >
-                Submit Answer
-              </button>
+                <button
+                  type="button"
+                  onClick={sharePuzzle}
+                  className="w-full max-w-[520px] rounded-xl border border-slate-300 bg-white py-3 text-sm font-bold text-slate-700 shadow-sm hover:bg-slate-50"
+                >
+                  Share Puzzle
+                </button>
+              </div>
             </div>
 
             {result && (
