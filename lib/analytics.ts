@@ -18,9 +18,13 @@ export function trackEvent(
   window.gtag("event", eventName, params);
 }
 
-export function trackGenerate(difficulty: string) {
+export function trackGenerate(
+  difficulty: string,
+  source: "generated" | "shared",
+) {
   trackEvent("generate_problem", {
     difficulty,
+    source,
   });
 }
 

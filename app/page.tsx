@@ -43,7 +43,7 @@ export default function Home() {
         const next = generateLatinSquarePuzzle(difficulty);
 
         setPuzzle(next);
-        trackGenerate(difficulty);
+        trackGenerate(difficulty, "generated");
         setAnswer(null);
         setResult(null);
 
@@ -60,22 +60,22 @@ export default function Home() {
   }, [difficulty]);
 
   useEffect(() => {
-  if (sharedLoaded) return;
+    if (sharedLoaded) return;
 
-  const params = new URLSearchParams(window.location.search);
-  const shared = params.get("puzzle");
+    const params = new URLSearchParams(window.location.search);
+    const shared = params.get("puzzle");
 
-  if (!shared) {
-    setSharedLoaded(true);
-    return;
-  }
+    if (!shared) {
+      setSharedLoaded(true);
+      return;
+    }
 
-  const decoded = decodePuzzle(shared);
+    const decoded = decodePuzzle(shared);
 
-  if (!decoded) {
-    setSharedLoaded(true);
-    return;
-  }
+    if (!decoded) {
+      setSharedLoaded(true);
+      return;
+    }
 
   const nextPuzzle: LatinSquarePuzzle = {
       size: 5,
@@ -94,6 +94,7 @@ export default function Home() {
 
     setPuzzle(nextPuzzle);
     setDifficulty(decoded.difficulty);
+    trackGenerate(decoded.difficulty, "shared");
     setAnswer(null);
     setResult(null);
     setStartedAt(start);
