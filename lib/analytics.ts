@@ -30,7 +30,6 @@ export function trackGenerate(
   difficulty: string,
   source: "generated" | "shared",
 ) {
-  console.log("trackGenerate", difficulty, source);
   trackEvent("generate_problem", {
     difficulty,
     source,
