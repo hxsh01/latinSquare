@@ -94,7 +94,9 @@ export default function Home() {
 
     setPuzzle(nextPuzzle);
     setDifficulty(decoded.difficulty);
+    console.log("run");
     trackGenerate(decoded.difficulty, "shared");
+    console.log("ran")
     setAnswer(null);
     setResult(null);
     setStartedAt(start);
