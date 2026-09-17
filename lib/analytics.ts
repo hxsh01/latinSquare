@@ -9,18 +9,30 @@ export function trackEvent(
 ) {
   if (
     typeof window === "undefined" ||
-    !GA_MEASUREMENT_ID ||
-    typeof window.gtag !== "function"
+    !GA_MEASUREMENT_ID
   ) {
     return;
   }
 
-  window.gtag("event", eventName, params);
+  if (typeof window.gtag === "function") {
+    window.gtag("event", eventName, params);
+    return;
+  }
+
+  window.setTimeout(() => {
+    if (typeof window.gtag === "function") {
+      window.gtag("event", eventName, params);
+    }
+  }, 1000);
 }
 
-export function trackGenerate(difficulty: string) {
+export function trackGenerate(
+  difficulty: string,
+  source: "generated" | "shared",
+) {
   trackEvent("generate_problem", {
     difficulty,
+    source,
   });
 }
 
