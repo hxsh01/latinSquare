@@ -3,11 +3,8 @@
 import { useState } from "react";
 import { trackFeedbackSubmit } from "../lib/analytics";
 
-type Category = "feedback" | "feature";
-
 export function FeedbackSection() {
   const [isOpen, setIsOpen] = useState(true);
-  const [category, setCategory] = useState<Category>("feedback");
   const [rating, setRating] = useState(0);
   const [message, setMessage] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -18,33 +15,33 @@ export function FeedbackSection() {
     setSubmitting(true);
 
     try {
-        const response = await fetch("/api/feedback", {
+      const response = await fetch("/api/feedback", {
         method: "POST",
         headers: {
-            "Content-Type": "application/json",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            category,
-            rating,
-            message,
+          category: "feedback",
+          rating,
+          message,
         }),
-        });
+      });
 
-        if (!response.ok) {
+      if (!response.ok) {
         throw new Error("Failed to submit feedback");
-        }
+      }
 
-        trackFeedbackSubmit(category, rating);
+      trackFeedbackSubmit("feedback", rating);
 
-        setMessage("");
-        setRating(0);
+      setMessage("");
+      setRating(0);
 
-        alert("Thank you! Your feedback has been submitted.");
+      alert("Thank you! Your feedback has been submitted.");
     } catch (error) {
-        console.error(error);
-        alert("Failed to submit feedback. Please try again.");
+      console.error(error);
+      alert("Failed to submit feedback. Please try again.");
     } finally {
-        setSubmitting(false);
+      setSubmitting(false);
     }
   }
 
@@ -58,12 +55,16 @@ export function FeedbackSection() {
       >
         <div>
           <h2 className="text-xl font-black">
-            Feedback & Feature Suggestions
+            Feedback
           </h2>
+          <p className="text-sm text-slate-500">
+            Tell us what you think or suggest a feature you'd like to
+            see.
+          </p>
 
           {!isOpen && (
             <p className="mt-1 text-sm text-slate-500">
-              Help improve the Latin Square Generator.
+              Share feedback or suggest a feature you'd like to see.
             </p>
           )}
         </div>
@@ -94,37 +95,6 @@ export function FeedbackSection() {
         <div className="overflow-hidden">
           <div className="border-t border-slate-100 p-4 sm:p-6">
             <div className="flex flex-col gap-5">
-              <div>
-                <p className="mb-2 text-sm font-bold text-slate-700">
-                  What would you like to share?
-                </p>
-
-                <div className="flex flex-wrap gap-2">
-                  <button
-                    type="button"
-                    onClick={() => setCategory("feedback")}
-                    className={`rounded-xl px-4 py-2 text-sm font-bold transition ${
-                      category === "feedback"
-                        ? "bg-slate-900 text-white"
-                        : "bg-slate-100 text-slate-700 hover:bg-slate-200"
-                    }`}
-                  >
-                    Feedback
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => setCategory("feature")}
-                    className={`rounded-xl px-4 py-2 text-sm font-bold transition ${
-                      category === "feature"
-                        ? "bg-slate-900 text-white"
-                        : "bg-slate-100 text-slate-700 hover:bg-slate-200"
-                    }`}
-                  >
-                    Feature Suggestion
-                  </button>
-                </div>
-              </div>
 
               <div>
                 <p className="mb-2 text-sm font-bold text-slate-700">
@@ -159,20 +129,14 @@ export function FeedbackSection() {
                   htmlFor="feedback-message"
                   className="mb-2 block text-sm font-bold text-slate-700"
                 >
-                  {category === "feature"
-                    ? "What feature would you like to see?"
-                    : "What do you think?"}
+                  What do you think?
                 </label>
 
                 <textarea
                   id="feedback-message"
                   value={message}
                   onChange={(event) => setMessage(event.target.value)}
-                  placeholder={
-                    category === "feature"
-                      ? "Suggest a feature..."
-                      : "Tell us what you think..."
-                  }
+                  placeholder="Tell us what you think or suggest a feature..."
                   rows={4}
                   className="w-full resize-none rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-slate-400 focus:ring-2 focus:ring-slate-100"
                 />

@@ -182,33 +182,33 @@ export default function Home() {
     <main className="min-h-screen px-2 py-6 sm:px-4 sm:py-4">
       <div className="mx-auto max-w-4xl">
         <section className="rounded-3xl border border-slate-200 bg-white p-4 shadow-soft">
-  <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-    <div className="min-w-0">
-      <div className="text-xl font-black tracking-tight sm:text-2xl">
-        Latin Square Generator
-      </div>
-    </div>
+          <div className="flex flex-col gap-4 sm:flex-row sm:justify-between">
+            <div className="min-w-0 flex flex-col gap-4 text-center sm:text-left sm:justify-center">
+              <div className="text-xl font-black tracking-tight sm:text-2xl">
+                Latin Square Generator
+              </div>
+            </div>
 
-    <div className="flex w-full items-end gap-2 sm:w-auto sm:gap-3">
-      <div className="min-w-0 flex-1 sm:w-64 sm:flex-none">
-        <DifficultySelector
-          value={difficulty}
-          onChange={handleDifficultyChange}
-          disabled={generating}
-        />
-      </div>
+            <div className="flex w-full items-end gap-2 sm:w-auto sm:gap-3">
+              <div className="min-w-0 flex-1 sm:w-64 sm:flex-none">
+                <DifficultySelector
+                  value={difficulty}
+                  onChange={handleDifficultyChange}
+                  disabled={generating}
+                />
+              </div>
 
-      <button
-        type="button"
-        onClick={generate}
-        disabled={generating}
-        className="h-10 w-24 shrink-0 rounded-xl bg-blue-600 px-3 text-sm font-bold text-white shadow-sm hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto sm:min-w-32 sm:px-4"
-      >
-        {generating ? "Generating…" : "Generate"}
-      </button>
-    </div>
-  </div>
-</section>
+              <button
+                type="button"
+                onClick={generate}
+                disabled={generating}
+                className="h-10 w-24 shrink-0 rounded-xl bg-blue-600 px-3 text-sm font-bold text-white shadow-sm hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto sm:min-w-32 sm:px-4"
+              >
+                {generating ? "Generating…" : "Generate"}
+              </button>
+            </div>
+          </div>
+        </section>
 
         {puzzle && (
           <section className="mt-5 rounded-3xl border border-slate-200 bg-white p-4 shadow-soft sm:p-6">
