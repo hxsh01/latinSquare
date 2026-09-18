@@ -57,3 +57,11 @@ export function trackFeedbackSubmit(
     rating,
   });
 }
+
+export function trackSharePuzzle() {
+  trackEvent("share_puzzle");
+}
+
+export function trackCopyAiPrompt() {
+  trackEvent("copy_ai_prompt");
+}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { LatinSquarePuzzle } from "../lib/latin-square/types";
 import { buildAiPrompt } from "../lib/latin-square/prompt";
+import { trackCopyAiPrompt } from "../lib/analytics";
 export function AiPrompt({ puzzle }: { puzzle: LatinSquarePuzzle }) {
   const [copied, setCopied] = useState(false);
   const prompt = buildAiPrompt(puzzle);
@@ -8,6 +9,7 @@ export function AiPrompt({ puzzle }: { puzzle: LatinSquarePuzzle }) {
     try {
       await navigator.clipboard.writeText(prompt);
       setCopied(true);
+      trackCopyAiPrompt();
       setTimeout(() => setCopied(false), 1500);
     } catch {}
   }

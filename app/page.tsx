@@ -17,6 +17,7 @@ import type {
 import {
   trackGenerate,
   trackPuzzleResult,
+  trackSharePuzzle,
 } from "../lib/analytics";
 import {
   encodePuzzle,
@@ -157,6 +158,7 @@ export default function Home() {
     const url = `${window.location.origin}/?puzzle=${encoded}`;
 
     navigator.clipboard.writeText(url);
+    trackSharePuzzle();
 
     alert("Puzzle link copied to clipboard.");
   }
