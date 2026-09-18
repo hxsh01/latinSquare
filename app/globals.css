@@ -35,9 +35,11 @@ select:focus-visible {
 }
 .latin-grid {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  width: min(100%, 520px);
-  aspect-ratio: 1;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  width: min(100%, 240px);
+  height: min(100%, 240px);
+  aspect-ratio: 1/1;
   border: 2px solid #0f172a;
   background: #0f172a;
   gap: 1px;
@@ -45,6 +47,8 @@ select:focus-visible {
 .latin-cell {
   min-width: 0;
   min-height: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -77,6 +81,7 @@ select:focus-visible {
 }
 @media (max-width: 640px) {
   .latin-grid {
-    width: min(100%, 430px);
+    width: min(100%, 240px);
+    height: min(100%, 240px);
   }
 }

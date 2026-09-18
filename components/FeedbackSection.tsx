@@ -67,8 +67,8 @@ export function FeedbackSection() {
             </p>
           )}
         </div>
-
-        <span
+        {/* accordian switch */}
+        {/* <span
           className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-slate-600 transition-transform duration-200 ${
             isOpen ? "rotate-180" : ""
           }`}
@@ -83,7 +83,7 @@ export function FeedbackSection() {
               strokeLinejoin="round"
             />
           </svg>
-        </span>
+        </span> */}
       </button>
 
       <div
