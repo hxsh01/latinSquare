@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { trackFeedbackSubmit } from "../lib/analytics";
+import { trackFeedbackSubmit, trackProfileVisit } from "../lib/analytics";
 
 export function FeedbackSection() {
   const [isOpen, setIsOpen] = useState(true);
@@ -81,6 +81,7 @@ export function FeedbackSection() {
             rel="noopener noreferrer"
             className="inline-flex shrink-0 items-center gap-0.5 text-sm font-bold text-blue-600 hover:text-blue-700"
             aria-label="Contact me on GitHub"
+            onClick={trackProfileVisit}
           >
 
             <svg

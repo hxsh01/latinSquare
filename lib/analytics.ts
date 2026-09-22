@@ -65,3 +65,7 @@ export function trackSharePuzzle() {
 export function trackCopyAiPrompt() {
   trackEvent("copy_ai_prompt");
 }
+
+export function trackProfileVisit() {
+  trackEvent("profile_visit");
+}
